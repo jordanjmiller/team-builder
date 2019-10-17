@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import MemberCard from './Components/MemberCard.js';
+import Forms from './Components/Forms.js';
 import './App.css';
 
 function App() {
+const [members, setMembers] = useState([
+  {name: 'Brandon', github: 'belzy', title:'Team Lead'},
+  {name: 'Adam', github: 'abc@123.com', title:'Student'},
+  {name: 'Forrest', github: 'abc@123.com', title:'Student'}]);
+
+const addNewMember = newMem => {
+  console.log("Members =", members);
+  const newMember = {
+    id: members.length,
+    name: newMem.name,
+    github: newMem.github, 
+    title: newMem.title
+  };
+  console.log("newMem = ", newMem)
+  console.log("newMember = ", newMember)
+  setMembers([...members, newMember]);
+};
+console.log(members);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Add new Member</p>
+      <MemberCard members={members}/>
+      <Forms addNewMember={addNewMember} />
     </div>
   );
 }
